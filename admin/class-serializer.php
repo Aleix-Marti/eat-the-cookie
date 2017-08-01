@@ -19,14 +19,49 @@ class Serializer {
 	public function save() {
 
 		// Validate the nonce and the user permission to save
-		if( ! ($this->has_valid_nonce() && current_user_can( 'manage_options') ) ) {
+		if ( ! ($this->has_valid_nonce() && current_user_can( 'manage_options') ) ) {
 			// TODO: display an error message.
-		}
+		}		
 
-		if ( null !== wp_unslash( $_POST['adv-cookies-msg'] ) ) {
+		if ( ( null !== wp_unslash( $_POST['adv-cookies-msg'] ) ) && 
+			( null !== wp_unslash( $_POST['adv-cookies-btn'] ) ) && 
+			( null !== wp_unslash( $_POST['adv-cookies-bg-color'] ) ) &&
+			( null !== wp_unslash( $_POST['adv-cookies-text-color'] ) ) &&
+			( null !== wp_unslash( $_POST['adv-cookies-is-modal'] ) ) &&			
+			( null !== wp_unslash( $_POST['adv-cookies-show-modal'] ) ) &&			
+			( null !== wp_unslash( $_POST['adv-cookies-modal-msg'] ) ) &&
+			( null !== wp_unslash( $_POST['adv-cookies-modal-btn'] ) ) ) {
 
-			$value = sanitize_textarea_field( $_POST['adv-cookies-msg'] );
-			update_option( 'etc_adv_msg', $value );
+			$value_msg = sanitize_textarea_field( $_POST['adv-cookies-msg'] );
+			update_option( 'etc_adv_msg', $value_msg );
+
+			$value_btn = sanitize_text_field( $_POST['adv-cookies-btn'] );
+			update_option( 'etc_adv_btn', $value_btn );			
+
+			$value_bg_color = sanitize_text_field( $_POST['adv-cookies-bg-color'] );
+			if ( ! ( $this->check_color( $value_color ) ) ) {
+				// TODO: display an error message.
+			}
+			update_option( 'etc_adv_bg_color', $value_bg_color );
+
+			$value_text_color = sanitize_text_field( $_POST['adv-cookies-text-color'] );
+			if ( ! ( $this->check_color( $value_text_color ) ) ) {
+				// TODO: display an error message.
+			}
+			update_option( 'etc_adv_text_color', $value_text_color );
+
+			$value_is_modal = sanitize_textarea_field( $_POST['adv-cookies-is-modal'] );
+			update_option( 'etc_adv_is_modal', $value_is_modal );
+
+			$value_show_btn = sanitize_textarea_field( $_POST['adv-cookies-show-modal'] );
+			update_option( 'etc_adv_show_btn', $value_show_btn );
+
+			$value_modal_msg = sanitize_textarea_field( $_POST['adv-cookies-modal-msg'] );
+			update_option( 'etc_adv_modal_msg', $value_modal_msg );
+
+
+			$value_modal_btn = sanitize_textarea_field( $_POST['adv-cookies-modal-btn'] );
+			update_option( 'etc_adv_modal_btn', $value_modal_btn );
 		}
 
 		$this->redirect_prev();
@@ -43,7 +78,7 @@ class Serializer {
 	private function has_valid_nonce() {
 
 		// The field is invalid if it isn't in the $_POST
-		if( ! isset( $_POST['etc-settings-msg'] ) ) {
+		if ( ! isset( $_POST['etc-settings-msg'] ) ) {
 			return false;
 		}
 
@@ -61,7 +96,7 @@ class Serializer {
 	private function redirect_prev() {
 
 		// Initialize the value
-		if( ! isset( $_POST['_wp_http_referer'] ) ) {
+		if ( ! isset( $_POST['_wp_http_referer'] ) ) {
 			$_POST['_wp_http_referer'] = wp_login_url();
 		}
 
@@ -73,5 +108,23 @@ class Serializer {
 		wp_safe_redirect( urldecode($url) );
 
 		exit;
+	}
+
+	/**
+	* Validate if user has inserted a HEX color width #.
+	*
+	* @access private
+	*
+	* @param string $color HEX color.
+	*
+	* @return boolean TRUE if $color is a valid HEX color; otherwise return FALSE.
+	*/	
+	private function check_color( $color ) { 
+     
+	    if ( preg_match( '/^#[a-f0-9]{6}$/i', $color ) ) { // if user insert a HEX color with #     
+	        return true;
+	    }
+     
+	    return false;
 	}
 }

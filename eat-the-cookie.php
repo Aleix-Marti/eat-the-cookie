@@ -17,7 +17,7 @@
  */
 
 
-if( ! defined( 'WPINC' ) ) {
+if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 // Include the shared dependency.
@@ -33,6 +33,9 @@ add_action( 'plugins_loaded', 'eat_the_cookie_settings' );
 
 function eat_the_cookie_settings() {
 
+	$settings = new Style_JS_Settings();
+	$settings->init();
+
 	$serializer = new Serializer();
 	$serializer->init();
 
@@ -43,5 +46,6 @@ function eat_the_cookie_settings() {
 
 	$public = new Show_Message ( $deserializer );
 	$public->init();
+	
 
 }

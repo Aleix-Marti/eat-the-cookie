@@ -1,0 +1,18 @@
+.etc_cookie_msg {
+ 	background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    box-shadow: 0px -2px 5px #eee;
+}
+
+.etc_modal_overlay {
+	display: none;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+}
