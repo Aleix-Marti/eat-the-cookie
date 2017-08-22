@@ -80,7 +80,7 @@ class Show_Message {
 			$modal.= 	'<div id="etc_modal_overlay" class="etc_modal_overlay">
 							<div class="etc_modal_box">
 								<p>'.$modal_message.'</p>
-								<button>'.$modal_button.'</button>
+								<button id="etc_modal_close">'.$modal_button.'</button>
 							</div>
 						</div>';
 		}

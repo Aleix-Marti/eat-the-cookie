@@ -6,16 +6,34 @@
 
 	// Enable/disable modal content text edition depending on the checkbox value
 	$(function() {
-		$('#adv-cookies-is-modal').on('change', function(){
-			var status = !$(this).is(':checked');
-			$('.etc-is-modal').each(function(){
-				$(this).attr( "disabled", status ); 
-			});
+
+		// Check initial value on load page
+		$(document).ready(function(){
+			if( $('#modal-yes').is(':checked') ){
+				$('.etc-is-modal').each(function(){
+					$(this).attr( "disabled", false ); 
+				});
+			}
+			if( $('#modal-no').is(':checked') ){
+				$('.etc-is-modal').each(function(){
+					$(this).attr( "disabled", true ); 
+				});
+			}
 		});
 
-		$('#etc_show_modal').on('click', function(){ alert();
-			$('#etc_modal_overlay').css('display:block');
-		})
+		// Enable/disable edition for modal text fields
+		$("input[name='adv-cookies-is-modal']").on('change', function(){
+			if( $('#modal-yes').is(':checked') ){
+				$('.etc-is-modal').each(function(){
+					$(this).attr( "disabled", false ); 
+				});
+			}
+			if( $('#modal-no').is(':checked') ){
+				$('.etc-is-modal').each(function(){
+					$(this).attr( "disabled", true ); 
+				});
+			}
+		});
 	});
 
 })( jQuery );

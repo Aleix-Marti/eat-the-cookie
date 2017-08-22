@@ -13,6 +13,7 @@
 class Style_JS_Settings {
 
 	public function init() {
+
 		// Default style for the cookies advertising message
 		wp_register_style( 'etc-style', plugin_dir_url( __FILE__ ) . 'includes/etc-style.css' );
 

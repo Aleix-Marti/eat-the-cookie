@@ -16,3 +16,16 @@
     position: fixed;
     top: 0;
 }
+
+.etc_modal_box {
+    display: flex;
+    width: 50%;
+    height: 50%;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid white;
+    position: relative;
+    margin: 10% auto;
+    color: white;
+}

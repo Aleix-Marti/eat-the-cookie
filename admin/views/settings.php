@@ -29,12 +29,13 @@
 				<p>
 					<label>Do you want to show full info on a modal box?</label>
 					<br />
-					<input type="checkbox" id="adv-cookies-is-modal" name="adv-cookies-is-modal" value="<?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_is_modal') ); ?>">
+					<label for="modal-no">NO</label><input id="modal-no" name="adv-cookies-is-modal" type="radio" value="0" <?php checked( '0', $this->deserializer->get_value( 'etc_adv_is_modal' ) ); ?> />
+					<label for="modal-yes">YES</label><input id="modal-yes" name="adv-cookies-is-modal" type="radio" value="1" <?php checked( '1', $this->deserializer->get_value( 'etc_adv_is_modal' ) ); ?> />
 				</p>
 				<p>
 					<label>Button text to show full info modal on advertising message</label>
 					<br />	
-					<input type="text" class="etc-is-modal" name="adv-cookies-show-modal" value="<?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_show_btn') ); ?>" disabled>
+					<input type="text" class="etc-is-modal" name="adv-cookies-show-modal" value="<?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_show_btn') ); ?>"  disabled>
 				</p>
 				<p>
 					<label>Cookies full info modal message</label>

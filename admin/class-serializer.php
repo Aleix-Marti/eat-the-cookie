@@ -17,49 +17,55 @@ class Serializer {
 	}
 
 	public function save() {
-
+// PC::debug( $_POST['adv-cookies-is-modal'] , 'is modal' );
 		// Validate the nonce and the user permission to save
 		if ( ! ($this->has_valid_nonce() && current_user_can( 'manage_options') ) ) {
 			// TODO: display an error message.
 		}		
 
-		if ( ( null !== wp_unslash( $_POST['adv-cookies-msg'] ) ) && 
-			( null !== wp_unslash( $_POST['adv-cookies-btn'] ) ) && 
-			( null !== wp_unslash( $_POST['adv-cookies-bg-color'] ) ) &&
-			( null !== wp_unslash( $_POST['adv-cookies-text-color'] ) ) &&
-			( null !== wp_unslash( $_POST['adv-cookies-is-modal'] ) ) &&			
-			( null !== wp_unslash( $_POST['adv-cookies-show-modal'] ) ) &&			
-			( null !== wp_unslash( $_POST['adv-cookies-modal-msg'] ) ) &&
-			( null !== wp_unslash( $_POST['adv-cookies-modal-btn'] ) ) ) {
-
+		if ( isset( $_POST['adv-cookies-msg'] ) && ( null !== wp_unslash( $_POST['adv-cookies-msg'] ) ) ) {
 			$value_msg = sanitize_textarea_field( $_POST['adv-cookies-msg'] );
 			update_option( 'etc_adv_msg', $value_msg );
+		}
 
+		if ( isset( $_POST['adv-cookies-btn'] ) && ( null !== wp_unslash( $_POST['adv-cookies-btn'] ) ) ) {
 			$value_btn = sanitize_text_field( $_POST['adv-cookies-btn'] );
-			update_option( 'etc_adv_btn', $value_btn );			
+			update_option( 'etc_adv_btn', $value_btn );
+		}
 
+		if ( isset( $_POST['adv-cookies-bg-color'] ) && ( null !== wp_unslash( $_POST['adv-cookies-bg-color'] ) ) ) {
 			$value_bg_color = sanitize_text_field( $_POST['adv-cookies-bg-color'] );
-			if ( ! ( $this->check_color( $value_color ) ) ) {
+			if ( ! ( $this->check_color( $value_bg_color ) ) ) {
 				// TODO: display an error message.
 			}
 			update_option( 'etc_adv_bg_color', $value_bg_color );
+		}
 
+		if ( isset( $_POST['adv-cookies-text-color'] ) && ( null !== wp_unslash( $_POST['adv-cookies-text-color'] ) ) ) {
 			$value_text_color = sanitize_text_field( $_POST['adv-cookies-text-color'] );
 			if ( ! ( $this->check_color( $value_text_color ) ) ) {
 				// TODO: display an error message.
 			}
 			update_option( 'etc_adv_text_color', $value_text_color );
+		}
 
-			$value_is_modal = sanitize_textarea_field( $_POST['adv-cookies-is-modal'] );
+		if ( isset( $_POST['adv-cookies-is-modal'] ) && ( null !== wp_unslash( $_POST['adv-cookies-is-modal'] ) ) ) {
+			$value_is_modal = $_POST['adv-cookies-is-modal'];
+			//( $value_is_modal !== null ) ? $value_is_modal : 0;
 			update_option( 'etc_adv_is_modal', $value_is_modal );
+		}
 
+		if ( isset( $_POST['adv-cookies-show-modal'] ) && ( null !== wp_unslash( $_POST['adv-cookies-show-modal'] ) ) ) {
 			$value_show_btn = sanitize_textarea_field( $_POST['adv-cookies-show-modal'] );
 			update_option( 'etc_adv_show_btn', $value_show_btn );
+		}
 
+		if ( isset( $_POST['adv-cookies-modal-msg'] ) && ( null !== wp_unslash( $_POST['adv-cookies-modal-msg'] ) ) ) {
 			$value_modal_msg = sanitize_textarea_field( $_POST['adv-cookies-modal-msg'] );
 			update_option( 'etc_adv_modal_msg', $value_modal_msg );
+		}
 
-
+		if ( isset( $_POST['adv-cookies-modal-btn'] ) && ( null !== wp_unslash( $_POST['adv-cookies-modal-btn'] ) ) ) {
 			$value_modal_btn = sanitize_textarea_field( $_POST['adv-cookies-modal-btn'] );
 			update_option( 'etc_adv_modal_btn', $value_modal_btn );
 		}
