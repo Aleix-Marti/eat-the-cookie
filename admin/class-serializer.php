@@ -56,18 +56,14 @@ class Serializer {
 		}
 
 		if ( isset( $_POST['adv-cookies-show-modal'] ) && ( null !== wp_unslash( $_POST['adv-cookies-show-modal'] ) ) ) {
-			$value_show_btn = sanitize_textarea_field( $_POST['adv-cookies-show-modal'] );
+			$value_show_btn = sanitize_text_field( $_POST['adv-cookies-show-modal'] );
 			update_option( 'etc_adv_show_btn', $value_show_btn );
 		}
 
 		if ( isset( $_POST['adv-cookies-modal-msg'] ) && ( null !== wp_unslash( $_POST['adv-cookies-modal-msg'] ) ) ) {
-			$value_modal_msg = sanitize_textarea_field( $_POST['adv-cookies-modal-msg'] );
+			// $value_modal_msg = sanitize_textarea_field( $_POST['adv-cookies-modal-msg'] );
+			$value_modal_msg = $_POST['adv-cookies-modal-msg'];
 			update_option( 'etc_adv_modal_msg', $value_modal_msg );
-		}
-
-		if ( isset( $_POST['adv-cookies-modal-btn'] ) && ( null !== wp_unslash( $_POST['adv-cookies-modal-btn'] ) ) ) {
-			$value_modal_btn = sanitize_textarea_field( $_POST['adv-cookies-modal-btn'] );
-			update_option( 'etc_adv_modal_btn', $value_modal_btn );
 		}
 
 		$this->redirect_prev();

@@ -40,12 +40,8 @@
 				<p>
 					<label>Cookies full info modal message</label>
 					<br />	
-					<textarea rows="4" cols="50" class="etc-is-modal" name="adv-cookies-modal-msg" disabled><?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_modal_msg') ); ?></textarea>
-				</p>
-				<p>
-					<label>Accept button text for modal message</label>
-					<br />	
-					<input type="text" class="etc-is-modal" name="adv-cookies-modal-btn" value="<?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_modal_btn') ); ?>" disabled>
+					<!-- <textarea rows="4" cols="50" class="etc-is-modal" name="adv-cookies-modal-msg" disabled><?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_modal_msg') ); ?></textarea> -->
+					<?php wp_editor( $this->deserializer->get_value( 'etc_adv_modal_msg') , 'adv-cookies-modal-msg', $settings = array('textarea_name'=>'adv-cookies-modal-msg') ); ?> 
 				</p>
 			</div><!-- .msg -->
 		</div><!-- #form-msg -->

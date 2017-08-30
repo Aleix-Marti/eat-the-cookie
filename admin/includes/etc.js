@@ -9,15 +9,20 @@
 
 		// Check initial value on load page
 		$(document).ready(function(){
+
+			$('#wp-adv-cookies-modal-msg-wrap').append('<div id="etc-disable-edition"></div>');
+
 			if( $('#modal-yes').is(':checked') ){
 				$('.etc-is-modal').each(function(){
 					$(this).attr( "disabled", false ); 
 				});
+				$('#etc-disable-edition').css('display','none');
 			}
 			if( $('#modal-no').is(':checked') ){
 				$('.etc-is-modal').each(function(){
 					$(this).attr( "disabled", true ); 
 				});
+				$('#etc-disable-edition').css('display','block');
 			}
 		});
 
@@ -27,11 +32,13 @@
 				$('.etc-is-modal').each(function(){
 					$(this).attr( "disabled", false ); 
 				});
+				$('#etc-disable-edition').css('display','none');
 			}
 			if( $('#modal-no').is(':checked') ){
 				$('.etc-is-modal').each(function(){
 					$(this).attr( "disabled", true ); 
 				});
+				$('#etc-disable-edition').css('display','block');
 			}
 		});
 	});

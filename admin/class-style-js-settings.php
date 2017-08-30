@@ -19,6 +19,8 @@ class Style_JS_Settings {
 
 		// Script to assign a color picker to plugin color choosers. Enqueued in footer with a WP color picker dependency
 		wp_register_script( 'etc-script', plugin_dir_url( __FILE__ ) . 'includes/etc.js', array( 'wp-color-picker' ), false, true );
+		// Script to set the cookie to hide the cookies message
+		wp_register_script( 'js-cookie-script', plugin_dir_url( __FILE__ ) . 'includes/js-cookie.js', array(), false, true );
 
 		wp_register_script( 'etc-script-front', plugin_dir_url( __FILE__ ) . 'includes/etc-front.js', 'jquery-core', false, true );
 
@@ -27,5 +29,7 @@ class Style_JS_Settings {
 
 		// Script to assign a color picker to plugin color choosers
 		wp_enqueue_script( 'etc-script' );
+		
+		wp_enqueue_script( 'js-cookie-script' );
 	}
 }

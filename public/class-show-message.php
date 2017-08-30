@@ -51,7 +51,7 @@ class Show_Message {
 		$text_color = $this->deserializer->get_value( 'etc_adv_text_color' );
 
 		$is_modal = $this->deserializer->get_value( 'etc_adv_is_modal' );
-		$show_button = $this->deserializer->get_value( 'etc_adv_show_btn' );
+		$show_modal = $this->deserializer->get_value( 'etc_adv_show_btn' );
 		$modal_message = $this->deserializer->get_value( 'etc_adv_modal_msg' );
 		$modal_button = $this->deserializer->get_value( 'etc_adv_modal_btn' );
 
@@ -63,29 +63,73 @@ class Show_Message {
 		$button = esc_html( $button );
 		$bg_color = esc_html( $bg_color );
 		$text_color = esc_html( $text_color );
-		$show_button = esc_html( $show_button );
+		$show_modal = esc_html( $show_modal );
+	
+		if( ! empty( $is_modal ) ) {
+			$msg = $message.' <a id="etc_show_modal" class="etc_cookie_msg__show" href="#">'.$show_modal.'</a>.';
+		}else{
+			$msg = $message;
+		}
 
 		$display = '<div id="etc_cookie_msg" class="etc_cookie_msg" style="background-color:'.$bg_color.';color:'.$text_color.';">
-						<p>'.$message.'<p>
-						<button>'.$button.'</button>';
-		if( ! empty( $is_modal ) ) {
-			$display.= '<button id="etc_show_modal" class="etc_show_modal">'.$show_button.'</button>';
-		}
+						<p class="etc_cookie_msg__text">'.$msg.'</p>
+						<button id="etc_cookie" class="etc_close etc_close-top">
+							<span class="etc_close_icon etc_close_icon-one"></span>
+							<span class="etc_close_icon etc_close_icon-two"></span>
+					  	</button>
+					</div>';
 		
-		$display.= '</div>';
+		// $display = '<div id="etc_cookie_msg" class="etc_cookie_msg" style="background-color:'.$bg_color.';color:'.$text_color.';">
+		// 				<p>'.$message.'<p>
+		// 				<button>'.$button.'</button>';
+		// if( ! empty( $is_modal ) ) {
+		// 	$display.= '<button id="etc_show_modal" class="etc_show_modal">'.$show_modal.'</button>';
+		// }		
 
 		$modal = '';
 
 		if( ! empty( $is_modal ) ) {
 			$modal.= 	'<div id="etc_modal_overlay" class="etc_modal_overlay">
+							<div id="etc_modal_condiciones" class="popup popup--inactive">
+								<button id="etc_modal_close" class="etc_close">
+									<span class="etc_close_icon etc_close_icon-one"></span>
+									<span class="etc_close_icon etc_close_icon-two"></span>
+							  	</button>
+								<div class="popup__scroll-content">'.$modal_message.'</div>
+							</div>
+						</div>';
+
+			/*$modal.= 	'<div id="etc_modal_overlay" class="etc_modal_overlay">
 							<div class="etc_modal_box">
 								<p>'.$modal_message.'</p>
 								<button id="etc_modal_close">'.$modal_button.'</button>
 							</div>
-						</div>';
+						</div>';*/
 		}
 
 		echo $display.$modal;
+
+		?>
+		<script>
+			jQuery(document).ready(function(){
+				Cookies.set('cookie-name', 'cookie-valuet', { expires: 7 });
+				Cookies.set('name', { foo: 'bar' });
+				console.log('hola');
+				console.dir(Cookies.get());
+				console.dir(Cookies.get('cookie-name'));
+				console.dir(Cookies.get('name'));
+				console.dir(Cookies.getJSON('name'));
+				console.dir(Cookies.getJSON());
+
+
+
+				Cookies.remove('cookie-name');
+				Cookies.remove('name');
+
+				console.dir(Cookies.get());
+			});
+		</script>
+		<?php
 
 	}
 }
