@@ -33,9 +33,17 @@ class Show_Message {
 	* Inizializes the hook responsible for print the cookies advertising with the message saved on the options page.
 	*/
 	public function init() {
-		wp_enqueue_style( 'etc-style' );			
-		wp_enqueue_script( 'etc-script-front' );			
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'etc_enqueue_scripts_styles' ) );	
 		add_action( 'wp_footer', array( $this, 'display' ) );
+	
+	}
+
+	public function etc_enqueue_scripts_styles() {
+
+		wp_enqueue_style( 'etc-style' );			
+		wp_enqueue_script( 'etc-script-front' );
+
 	}
 
 	/**
@@ -78,14 +86,7 @@ class Show_Message {
 							<span class="etc_close_icon etc_close_icon-one"></span>
 							<span class="etc_close_icon etc_close_icon-two"></span>
 					  	</button>
-					</div>';
-		
-		// $display = '<div id="etc_cookie_msg" class="etc_cookie_msg" style="background-color:'.$bg_color.';color:'.$text_color.';">
-		// 				<p>'.$message.'<p>
-		// 				<button>'.$button.'</button>';
-		// if( ! empty( $is_modal ) ) {
-		// 	$display.= '<button id="etc_show_modal" class="etc_show_modal">'.$show_modal.'</button>';
-		// }		
+					</div>';	
 
 		$modal = '';
 
@@ -99,13 +100,6 @@ class Show_Message {
 								<div class="popup__scroll-content">'.$modal_message.'</div>
 							</div>
 						</div>';
-
-			/*$modal.= 	'<div id="etc_modal_overlay" class="etc_modal_overlay">
-							<div class="etc_modal_box">
-								<p>'.$modal_message.'</p>
-								<button id="etc_modal_close">'.$modal_button.'</button>
-							</div>
-						</div>';*/
 		}
 
 		echo $display.$modal;
@@ -113,21 +107,6 @@ class Show_Message {
 		?>
 		<script>
 			jQuery(document).ready(function(){
-				
-				// console.dir(Cookies.get('cookie-name'));
-				// console.dir(Cookies.get('cookie-sema'));
-				/*Cookies.set('name', { foo: 'bar' });
-				console.log('hola');
-				console.dir(Cookies.get());
-				console.dir(Cookies.get('cookie-name'));
-				console.dir(Cookies.get('name'));
-				console.dir(Cookies.getJSON('name'));
-				console.dir(Cookies.getJSON());
-
-
-
-				Cookies.remove('cookie-name');
-				Cookies.remove('name');*/
 				
 				if(Cookies.get('etc-show') == 'show-message'){
 					jQuery('.etc_cookie_msg').removeClass('show').addClass('close');
@@ -139,8 +118,7 @@ class Show_Message {
 					Cookies.set('etc-show', 'show-message', { expires: <?php echo $days; ?> });
 					jQuery('.etc_cookie_msg').removeClass('show').addClass('close');
 				});
-				
-				console.dir(Cookies.get());
+console.dir(Cookies.get());
 			});
 		</script>
 		<?php

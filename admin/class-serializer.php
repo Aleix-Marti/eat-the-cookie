@@ -16,7 +16,7 @@ class Serializer {
 		add_action( 'admin_post', array( $this, 'save' ) );				
 	}
 
-	public function save() { delete_option('adv_cookies_days');
+	public function save() { 
 // PC::debug( $_POST['adv-cookies-is-modal'] , 'is modal' );
 		// Validate the nonce and the user permission to save
 		if ( ! ($this->has_valid_nonce() && current_user_can( 'manage_options') ) ) {

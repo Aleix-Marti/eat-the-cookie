@@ -28,9 +28,9 @@ class Submenu_Page {
         include_once( 'views/settings.php' );
     }
 
-    public function colorpicker() {
+    /*public function colorpicker() {
         // Css rules for Color Picker
-        wp_enqueue_style( 'wp-color-picker' );
+        //wp_enqueue_style( 'wp-color-picker' );
 
         // Register javascript
         add_action('admin_enqueue_scripts', array( $this, 'enqueue_admin_js' ) );
@@ -38,7 +38,7 @@ class Submenu_Page {
 
     public function enqueue_admin_js() {
 
-    }
+    }*/
 
     
      
