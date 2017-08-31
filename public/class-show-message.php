@@ -45,6 +45,7 @@ class Show_Message {
 	*/
 	public function display() {
 		
+		$days = $this->deserializer->get_value( 'etc_adv_days' );
 		$message = $this->deserializer->get_value( 'etc_adv_msg' );
 		$button = $this->deserializer->get_value( 'etc_adv_btn' );
 		$bg_color = $this->deserializer->get_value( 'etc_adv_bg_color' );
@@ -112,8 +113,10 @@ class Show_Message {
 		?>
 		<script>
 			jQuery(document).ready(function(){
-				Cookies.set('cookie-name', 'cookie-valuet', { expires: 7 });
-				Cookies.set('name', { foo: 'bar' });
+				
+				// console.dir(Cookies.get('cookie-name'));
+				// console.dir(Cookies.get('cookie-sema'));
+				/*Cookies.set('name', { foo: 'bar' });
 				console.log('hola');
 				console.dir(Cookies.get());
 				console.dir(Cookies.get('cookie-name'));
@@ -124,8 +127,19 @@ class Show_Message {
 
 
 				Cookies.remove('cookie-name');
-				Cookies.remove('name');
+				Cookies.remove('name');*/
+				
+				if(Cookies.get('etc-show') == 'show-message'){
+					jQuery('.etc_cookie_msg').removeClass('show').addClass('close');
+				}else{
+					jQuery('.etc_cookie_msg').removeClass('close').addClass('show');
+				}
 
+				jQuery('#etc_cookie').on('click', function(){
+					Cookies.set('etc-show', 'show-message', { expires: <?php echo $days; ?> });
+					jQuery('.etc_cookie_msg').removeClass('show').addClass('close');
+				});
+				
 				console.dir(Cookies.get());
 			});
 		</script>

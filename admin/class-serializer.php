@@ -16,12 +16,17 @@ class Serializer {
 		add_action( 'admin_post', array( $this, 'save' ) );				
 	}
 
-	public function save() {
+	public function save() { delete_option('adv_cookies_days');
 // PC::debug( $_POST['adv-cookies-is-modal'] , 'is modal' );
 		// Validate the nonce and the user permission to save
 		if ( ! ($this->has_valid_nonce() && current_user_can( 'manage_options') ) ) {
 			// TODO: display an error message.
 		}		
+
+		if ( isset( $_POST['adv-cookies-days'] ) && ( null !== wp_unslash( $_POST['adv-cookies-days'] ) ) ) {
+			$value_days = absint( $_POST['adv-cookies-days'] );
+			update_option( 'etc_adv_days', $value_days );
+		}
 
 		if ( isset( $_POST['adv-cookies-msg'] ) && ( null !== wp_unslash( $_POST['adv-cookies-msg'] ) ) ) {
 			$value_msg = sanitize_textarea_field( $_POST['adv-cookies-msg'] );

@@ -40,7 +40,7 @@ class Submenu {
 		// add_options_page( $page_title, $menu_title, $capability, $menu_slug, $function );
 		add_options_page( 
 			'Eat the Cookie Settings', 
-			'Eat the Cookie Settings', 
+			'ETC Settings', 
 			'manage_options', 
 			'etc-settings',
 			array( $this->submenu_page, 'etc_settings_page') 

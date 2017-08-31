@@ -7,6 +7,11 @@
 			<h2>Messages</h2>
 			<div class="msg">
 				<p>
+					<label>Number of days until show the message again</label>
+					<br />	
+					<input type="number" name="adv-cookies-days" min="0" max="180" value="<?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_days' ) ); ?>">
+				</p>
+				<p>
 					<label>Cookies advertising message</label>
 					<br />	
 					<textarea rows="4" cols="50" name="adv-cookies-msg"><?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_msg') ); ?></textarea>
