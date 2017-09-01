@@ -23,12 +23,12 @@
     transition: all .3s;
 }
 
-.etc_cookie_msg.show {
+.etc_cookie_msg.etc_show {
     opacity: 0.8;
     top: 0px;
 }
 
-.etc_cookie_msg.close {
+.etc_cookie_msg.etc_close {
     opacity: 0;
     top: -200px;
 }

@@ -6,7 +6,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Eat the Cookie
- * Plugin URI:        --
+ * Plugin URI:        https://github.com/js-cookie/js-cookie
  * Description:       Customizable Cookies notification.
  * Version:           1.0.0
  * Author:            Aleix Martí Carmona
@@ -40,12 +40,12 @@ function eat_the_cookie_settings() {
 	$serializer->init();
 
 	$deserializer = new Deserializer();
-	
+
 	$plugin = new Submenu ( new Submenu_Page( $deserializer ) );
 	$plugin->init();
 
 	$public = new Show_Message ( $deserializer );
 	$public->init();
-	
+
 
 }

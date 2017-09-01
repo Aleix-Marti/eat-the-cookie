@@ -34,14 +34,22 @@ class Show_Message {
 	*/
 	public function init() {
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'etc_enqueue_scripts_styles' ) );	
+		add_action( 'wp_loaded', array( $this, 'etc_register_scripts_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'etc_enqueue_scripts_styles' ) );
 		add_action( 'wp_footer', array( $this, 'display' ) );
-	
+
+	}
+
+	public function etc_register_scripts_styles() { 
+
+		wp_register_style( 'etc-style', plugin_dir_url( __FILE__ ) . 'includes/etc-style.css' );
+		wp_register_script( 'etc-script-front', plugin_dir_url( __FILE__ ) . 'includes/etc-front.js', 'jquery-core', false, true );
+		
 	}
 
 	public function etc_enqueue_scripts_styles() {
 
-		wp_enqueue_style( 'etc-style' );			
+		wp_enqueue_style( 'etc-style' );
 		wp_enqueue_script( 'etc-script-front' );
 
 	}
@@ -52,10 +60,9 @@ class Show_Message {
 	* @return string $message The cookies advertising message.
 	*/
 	public function display() {
-		
+
 		$days = $this->deserializer->get_value( 'etc_adv_days' );
 		$message = $this->deserializer->get_value( 'etc_adv_msg' );
-		$button = $this->deserializer->get_value( 'etc_adv_btn' );
 		$bg_color = $this->deserializer->get_value( 'etc_adv_bg_color' );
 		$text_color = $this->deserializer->get_value( 'etc_adv_text_color' );
 
@@ -64,16 +71,15 @@ class Show_Message {
 		$modal_message = $this->deserializer->get_value( 'etc_adv_modal_msg' );
 		$modal_button = $this->deserializer->get_value( 'etc_adv_modal_btn' );
 
-		if ( empty( $message ) || empty( $button ) || empty( $bg_color ) || empty( $text_color ) ) {
+		if ( empty( $message ) || empty( $show_modal ) || empty( $bg_color ) || empty( $text_color ) ) {
 			return;
 		}
 
 		$message = esc_html( $message );
-		$button = esc_html( $button );
 		$bg_color = esc_html( $bg_color );
 		$text_color = esc_html( $text_color );
 		$show_modal = esc_html( $show_modal );
-	
+
 		if( ! empty( $is_modal ) ) {
 			$msg = $message.' <a id="etc_show_modal" class="etc_cookie_msg__show" href="#">'.$show_modal.'</a>.';
 		}else{
@@ -86,7 +92,7 @@ class Show_Message {
 							<span class="etc_close_icon etc_close_icon-one"></span>
 							<span class="etc_close_icon etc_close_icon-two"></span>
 					  	</button>
-					</div>';	
+					</div>';
 
 		$modal = '';
 
@@ -106,17 +112,17 @@ class Show_Message {
 
 		?>
 		<script>
-			jQuery(document).ready(function(){
-				
+			jQuery(document).ready(function() {
+
 				if(Cookies.get('etc-show') == 'show-message'){
-					jQuery('.etc_cookie_msg').removeClass('show').addClass('close');
+					jQuery('.etc_cookie_msg').removeClass('show').addClass('etc_close');
 				}else{
-					jQuery('.etc_cookie_msg').removeClass('close').addClass('show');
+					jQuery('.etc_cookie_msg').removeClass('close').addClass('etc_show');
 				}
 
 				jQuery('#etc_cookie').on('click', function(){
 					Cookies.set('etc-show', 'show-message', { expires: <?php echo $days; ?> });
-					jQuery('.etc_cookie_msg').removeClass('show').addClass('close');
+					jQuery('.etc_cookie_msg').removeClass('etc_show').addClass('cetc_lose');
 				});
 console.dir(Cookies.get());
 			});

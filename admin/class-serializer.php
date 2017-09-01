@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * Sanitize all the form values before to put them in the database.
 *
@@ -13,15 +13,15 @@
 class Serializer {
 
 	public function init() {
-		add_action( 'admin_post', array( $this, 'save' ) );				
+		add_action( 'admin_post', array( $this, 'save' ) );
 	}
 
-	public function save() { 
+	public function save() {
 // PC::debug( $_POST['adv-cookies-is-modal'] , 'is modal' );
 		// Validate the nonce and the user permission to save
 		if ( ! ($this->has_valid_nonce() && current_user_can( 'manage_options') ) ) {
 			// TODO: display an error message.
-		}		
+		}
 
 		if ( isset( $_POST['adv-cookies-days'] ) && ( null !== wp_unslash( $_POST['adv-cookies-days'] ) ) ) {
 			$value_days = absint( $_POST['adv-cookies-days'] );
@@ -31,11 +31,6 @@ class Serializer {
 		if ( isset( $_POST['adv-cookies-msg'] ) && ( null !== wp_unslash( $_POST['adv-cookies-msg'] ) ) ) {
 			$value_msg = sanitize_textarea_field( $_POST['adv-cookies-msg'] );
 			update_option( 'etc_adv_msg', $value_msg );
-		}
-
-		if ( isset( $_POST['adv-cookies-btn'] ) && ( null !== wp_unslash( $_POST['adv-cookies-btn'] ) ) ) {
-			$value_btn = sanitize_text_field( $_POST['adv-cookies-btn'] );
-			update_option( 'etc_adv_btn', $value_btn );
 		}
 
 		if ( isset( $_POST['adv-cookies-bg-color'] ) && ( null !== wp_unslash( $_POST['adv-cookies-bg-color'] ) ) ) {
@@ -125,13 +120,13 @@ class Serializer {
 	* @param string $color HEX color.
 	*
 	* @return boolean TRUE if $color is a valid HEX color; otherwise return FALSE.
-	*/	
-	private function check_color( $color ) { 
-     
-	    if ( preg_match( '/^#[a-f0-9]{6}$/i', $color ) ) { // if user insert a HEX color with #     
+	*/
+	private function check_color( $color ) {
+
+	    if ( preg_match( '/^#[a-f0-9]{6}$/i', $color ) ) { // if user insert a HEX color with #
 	        return true;
 	    }
-     
+
 	    return false;
 	}
 }
