@@ -3,6 +3,7 @@
 :root {
     --inter: #fd7354;    
     --gray: #222;
+    --text-color: #222;
 }
 
 .etc_cookie_msg {
@@ -82,7 +83,7 @@
 	display: block;
     width: 100vw;
     height: 0vh;
-    z-index: 1000;
+    z-index: 9999;
     background-color: rgba(0,0,0,0);
     position: fixed;
     top: 0;
@@ -149,6 +150,7 @@ body.etc_modal_open {
     height: 50vh;
     overflow: auto;
     margin-top: 20px;
+    color: var(--text-color);
 }
   
 .etc_close {
@@ -161,11 +163,13 @@ body.etc_modal_open {
     width: 30px;
     height: 30px;
     box-sizing: content-box;
+    box-shadow: none;
     cursor: pointer;
 }
 
 .etc_close:hover {
     background: transparent;
+    border: none;
 }
 
 .etc_close_icon {
