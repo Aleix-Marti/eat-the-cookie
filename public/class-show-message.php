@@ -81,7 +81,7 @@ class Show_Message {
 		$show_modal = esc_html( $show_modal );
 
 		if( ! empty( $is_modal ) ) {
-			$msg = $message.' <a id="etc_show_modal" class="etc_cookie_msg__show" href="#">'.$show_modal.'</a>.';
+			$msg = $message.' <a id="etc_show_modal" class="etc_cookie_msg__show" style="color:'.$text_color.';" href="#">'.$show_modal.'</a>.';
 		}else{
 			$msg = $message;
 		}
@@ -115,16 +115,15 @@ class Show_Message {
 			jQuery(document).ready(function() {
 
 				if(Cookies.get('etc-show') == 'show-message'){
-					jQuery('.etc_cookie_msg').removeClass('show').addClass('etc_close');
+					jQuery('.etc_cookie_msg').removeClass('etc_show').addClass('etc_close');
 				}else{
-					jQuery('.etc_cookie_msg').removeClass('close').addClass('etc_show');
+					jQuery('.etc_cookie_msg').removeClass('etc_close').addClass('etc_show');
 				}
 
 				jQuery('#etc_cookie').on('click', function(){
 					Cookies.set('etc-show', 'show-message', { expires: <?php echo $days; ?> });
-					jQuery('.etc_cookie_msg').removeClass('etc_show').addClass('cetc_lose');
+					jQuery('.etc_cookie_msg').removeClass('etc_show').addClass('etc_close');
 				});
-console.dir(Cookies.get());
 			});
 		</script>
 		<?php

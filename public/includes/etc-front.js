@@ -8,14 +8,14 @@ jQuery(function ($) {
 		$('#etc_show_modal').on('click', function(){
 			$('.etc_modal_overlay').addClass('active');
 			$('#etc_modal_condiciones').removeClass('popup--inactive').addClass('popup--active');
-			$('body').addClass('modal-open');
+			$('body').addClass('etc_modal_open');
 		});
 
 		// Close modal
 		$('#etc_modal_close').on('click', function(){
 			$('.etc_modal_overlay').removeClass('active');
 			$('#etc_modal_condiciones').removeClass('popup--active').addClass('popup--inactive');
-			$('body').removeClass('modal-open');
+			$('body').removeClass('etc_modal_open');
 		});	
 			
 	});
