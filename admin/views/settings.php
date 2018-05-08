@@ -12,9 +12,10 @@
 					<input type="number" name="adv-cookies-days" min="0" max="180" value="<?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_days' ) ); ?>">
 				</p>
 				<p>
-					<label>Cookies advertising message</label>
+					<label>Cookies advertising message (accepts HTML)</label>
 					<br />
 					<textarea rows="4" cols="50" name="adv-cookies-msg"><?php echo esc_attr( $this->deserializer->get_value( 'etc_adv_msg') ); ?></textarea>
+					<?php /* wp_editor( $this->deserializer->get_value( 'etc_adv_msg') , 'adv-cookies-msg', $settings = array('textarea_name'=>'adv-cookies-msg') ); */ ?>
 				</p>
 				<p>
 					<label>Background color</label>
