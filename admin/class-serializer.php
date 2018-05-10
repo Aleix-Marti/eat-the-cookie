@@ -30,7 +30,7 @@ class Serializer {
 
 		if ( isset( $_POST['adv-cookies-msg'] ) && ( null !== wp_unslash( $_POST['adv-cookies-msg'] ) ) ) {
 			// $value_msg = sanitize_textarea_field( $_POST['adv-cookies-msg'] );
-			$value_msg = $_POST['adv-cookies-msg'];
+			$value_msg = htmlentities($_POST['adv-cookies-msg']);
 			update_option( 'etc_adv_msg', $value_msg );
 		}
 

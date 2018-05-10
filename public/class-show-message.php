@@ -75,7 +75,8 @@ class Show_Message {
 			return;
 		}
 
-		$message = esc_html( $message );
+		// $message = esc_html( $message );
+		$message = html_entity_decode( $message );
 		$bg_color = esc_html( $bg_color );
 		$text_color = esc_html( $text_color );
 		$show_modal = esc_html( $show_modal );
