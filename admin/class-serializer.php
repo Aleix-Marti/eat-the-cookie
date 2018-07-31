@@ -20,7 +20,8 @@ class Serializer {
 // PC::debug( $_POST['adv-cookies-is-modal'] , 'is modal' );
 		// Validate the nonce and the user permission to save
 		if ( ! ($this->has_valid_nonce() && current_user_can( 'manage_options') ) ) {
-			// TODO: display an error message.
+			// TODO: display an error message and exit.
+			exit();
 		}
 
 		if ( isset( $_POST['adv-cookies-days'] ) && ( null !== wp_unslash( $_POST['adv-cookies-days'] ) ) ) {
